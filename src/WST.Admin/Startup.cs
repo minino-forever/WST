@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,12 +24,16 @@ namespace WST.Admin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<WstDbContext>(options => options.UseNpgsql(Configuration["Data:wst:ConnectionString"]));
+            services.AddDbContext<IdentityDbContext>(options => options.UseNpgsql(Configuration["Data:identity:ConnectionString"]));
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddDefaultTokenProviders();
+            
             services.AddSingleton<IElectricLocomotiveRepository, ElectricLocomotiveRepository>();
             services.AddSingleton<IBreakingRepository, BreakingRepository>();
             services.AddSingleton<IBreakingImageRepository, BreakingImageRepository>();
             
-
             services.AddSingleton(new MapperConfiguration(RegisterMapping).CreateMapper());
             
             services.AddMvc();
@@ -48,10 +53,14 @@ namespace WST.Admin
             app.UseStaticFiles();
 
             app.UseSession();
+
+            app.UseAuthentication();
             
             app.UseMvc(MapRoutes);
             
             MigrationHelper.Migrate(app);
+
+            IdentitySeedData.EnsurePopulated(app).Wait();
         }
         
         private static void MapRoutes(IRouteBuilder routes)

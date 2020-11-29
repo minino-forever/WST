@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WST.Admin.Infrastructure;
@@ -10,6 +11,7 @@ using WST.Admin.Models.ViewModels;
 
 namespace WST.Admin.Controllers
 {
+    [Authorize]
     public class ElectricLocomotiveController : Controller
     {
         private readonly IElectricLocomotiveRepository _repository;

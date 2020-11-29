@@ -2,10 +2,10 @@
 
 @foreach (var menuItem in Model)
 {
-    <a class="btn btn-block @(menuItem.Controller == ViewBag.SelectedMenuItem ? "btn-info" : "btn-secondary")"
+    <a class="btn btn-lg btn-block @(menuItem.Controller == ViewBag.SelectedMenuItem ? "btn-info" : "btn-secondary")"
+       
        asp-action="Index"
        asp-controller=@menuItem.Controller
-       @* asp-route-category="@category" *@
        asp-route-page="1"
     >
         @menuItem.Name

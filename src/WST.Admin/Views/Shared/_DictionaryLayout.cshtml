@@ -6,8 +6,8 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css" />
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css"/>
     <title>@ViewBag.Title</title>
     <style>
         .input-validation-error {
@@ -20,8 +20,11 @@
     <script src="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body class="m-1 p-1">
-<div class="bg-info p-2">
-    <h4>@ViewBag.Title</h4>
+<div class="bg-info p-2" style="display: flex; flex-direction: row; width: 100%; justify-content: space-between">
+    <span>
+        <h4>@ViewBag.Title</h4>
+    </span>
+    <a class="btn btn-sm btn-primary" asp-action="Logout" asp-controller="Account">Выйти</a>
 </div>
 @if (TempData["message"] != null)
 {
