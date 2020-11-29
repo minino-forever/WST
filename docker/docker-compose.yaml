@@ -1,0 +1,8 @@
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123qwe
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432

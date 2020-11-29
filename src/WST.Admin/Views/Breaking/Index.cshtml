@@ -1,0 +1,42 @@
+@model ListDto<Breaking>
+
+@{
+    ViewBag.Title = "Неисправности";
+    Layout = "_DictionaryLayout";
+}
+
+<table class="table table-striped table-bordered table-sm">
+    <tr>
+        <th class="text-center">Описание</th>
+        <th class="text-center">Способ исправления</th>
+    </tr>
+
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td class="text-right">@item.Description</td>
+            <td class="text-right">@item.RepairMethod</td>
+            <td class="text-center">
+                <form asp-action="Delete" method="post">
+                    <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-breakingId="@item.Id">Редактировать</a>
+                    <input type="hidden" name="breakingId" value="@item.Id"/>
+                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<div class="text-center">
+    <a asp-action="Create" class="btn btn-primary">Создать</a>
+</div>
+
+<div
+    page-model="@Model.PagingInfo"
+    page-action="List"
+    page-classes-enabled="true"
+    page-class="btn"
+    page-class-normal="btn-secondary"
+    page-class-selected="btn-primary"
+    @* page-url-category="@Model.CurrentCategory" *@
+    class="btn-group pull-right m-1">
+</div>

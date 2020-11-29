@@ -1,0 +1,57 @@
+@model ElectricLocomotive
+
+@{
+    ViewBag.Title = "Электровоз";
+    Layout = "_DictionaryLayout";
+}
+
+<form asp-action="Edit" method="post">
+    <input asp-for="Id" type="hidden" class="form-control"/>
+    <div class="form-group">
+        <label asp-for="SerialNumber">Серийный номер</label>
+        <div>
+            <span asp-validation-for="SerialNumber" class="text-danger"></span>
+        </div>
+        <input asp-for="SerialNumber" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Modification">Модификация</label>
+        <div>
+            <span asp-validation-for="Modification" class="text-danger"></span>
+        </div>
+        <input asp-for="Modification" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Power">Мощность</label>
+        <div>
+            <span asp-validation-for="Power" class="text-danger"></span>
+        </div>
+        <input asp-for="Power" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="SectionCount">Количество секций</label>
+        <div>
+            <span asp-validation-for="SectionCount" class="text-danger"></span>
+        </div>
+        <input asp-for="SectionCount" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="PinCount">Количество осей</label>
+        <div>
+            <span asp-validation-for="PinCount" class="text-danger"></span>
+        </div>
+        <input asp-for="PinCount" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="UniqueNumber">Уникальный номер</label>
+        <div>
+            <span asp-validation-for="UniqueNumber" class="text-danger"></span>
+        </div>
+        <input asp-for="UniqueNumber" class="form-control"/>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отменить</a>
+    </div>
+
+</form>

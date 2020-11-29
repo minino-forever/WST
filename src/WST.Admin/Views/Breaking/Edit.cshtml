@@ -1,0 +1,50 @@
+@model Breaking
+
+@{
+    ViewBag.Title = "Неисправности";
+    Layout = "_DictionaryLayout";
+}
+
+<form asp-action="Edit" method="post">
+    <input asp-for="Id" type="hidden" class="form-control"/>
+    <div class="form-group">
+        <label asp-for="Description">Описание</label>
+        <div>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <input asp-for="Description" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="RepairMethod">Способ исправления</label>
+        <div>
+            <span asp-validation-for="RepairMethod" class="text-danger"></span>
+        </div>
+        <input asp-for="RepairMethod" class="form-control"/>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отменить</a>
+    </div>
+</form>
+
+<div>
+    <h3>Галерея</h3>
+    <form method="post" enctype="multipart/form-data" asp-action="Upload" multiple="multiple">
+        <input asp-for="Id" type="hidden" class="form-control"/>
+        <label class="btn btn-primary" for="files">
+            <input id="files" type="file" name="files" style="display:none"
+                   onchange="
+                        var submitWrapper = document.getElementById('submitWrapper');
+                        submitWrapper.hidden = false;
+                        var fileInfo = document.getElementById('upload-file-info');
+                        fileInfo.textContent='Файлов выбрано:' + this.files.length;">
+            Выбрать изображения
+        </label>
+        <span class='label label-info' id="upload-file-info"></span>
+
+        <div hidden id="submitWrapper">
+            <input type="submit" value="Загрузить"/>
+        </div>
+    </form>
+</div>
+
