@@ -20,8 +20,11 @@ namespace WST.Admin.Models
         /// <summary>Неисправность</summary>
         public DbSet<Breaking> Breaking { get; set; }
         
-        /// <summary></summary>
+        /// <summary>Изображение поломки</summary>
         public DbSet<BreakingImage> BreakingImage { get; set; }
+        
+        /// <summary>Деталь</summary>
+        public DbSet<Detail> Detail { get; set; }
 
         /// <summary>Связь электровоза и поломок</summary>
         public DbSet<ElectricLocomotiveBreakingProxy> ElectricLocomotiveBreakingProxy { get; set; }

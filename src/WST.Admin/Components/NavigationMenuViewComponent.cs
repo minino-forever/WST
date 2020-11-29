@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WST.Admin.Models.ViewModels;
 
@@ -7,9 +6,8 @@ namespace WST.Admin.Components
 {
     public class NavigationMenuViewComponent : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync()
+        public IViewComponentResult Invoke()
         {
-            // создать класс view model
             ViewBag.SelectedMenuItem = RouteData?.Values["controller"];
 
             return View(GetMenuItems());
@@ -24,12 +22,16 @@ namespace WST.Admin.Components
                     Controller = "ElectricLocomotive",
                     Name = "Электровоз"
                 },
-
                 new MenuItemViewModel
                 {
                     Controller = "Breaking",
                     Name = "Неисправности"
                 },
+                new MenuItemViewModel
+                {
+                    Controller = "Detail",
+                    Name = "Детали"
+                }
             };
         }
     }

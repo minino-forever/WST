@@ -33,6 +33,7 @@ namespace WST.Admin
             services.AddSingleton<IElectricLocomotiveRepository, ElectricLocomotiveRepository>();
             services.AddSingleton<IBreakingRepository, BreakingRepository>();
             services.AddSingleton<IBreakingImageRepository, BreakingImageRepository>();
+            services.AddSingleton<IDetailRepository, DetailRepository>();
             
             services.AddSingleton(new MapperConfiguration(RegisterMapping).CreateMapper());
             

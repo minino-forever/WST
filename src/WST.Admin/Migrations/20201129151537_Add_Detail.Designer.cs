@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WST.Admin.Models;
@@ -9,9 +10,10 @@ using WST.Admin.Models;
 namespace WST.Admin.Migrations
 {
     [DbContext(typeof(WstDbContext))]
-    partial class WstDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201129151537_Add_Detail")]
+    partial class Add_Detail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
