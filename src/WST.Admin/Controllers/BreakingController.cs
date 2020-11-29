@@ -114,7 +114,7 @@ namespace WST.Admin.Controllers
 
         public IActionResult Create()
         {
-            return View("Edit", new BreakingFormDto { ImageUrls = new string[0]});
+            return View("Edit", new BreakingFormDto());
         }
 
         [HttpPost]

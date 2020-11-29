@@ -9,7 +9,7 @@ namespace WST.Admin.Models
         /// <summary>Описание поломки</summary>
         public string Description { get; set; }
 
-        /// <summary>Способ исправления поломки</summary>
+        /// <summary>Способ устранения поломки</summary>
         public string RepairMethod { get; set; }
 
         /// <summary>Дата создания</summary>
