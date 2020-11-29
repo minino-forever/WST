@@ -1,5 +1,4 @@
 using System;
-using Microsoft.AspNetCore.Http;
 
 namespace WST.Admin.Models.ViewModels.Breaking
 {
@@ -10,7 +9,7 @@ namespace WST.Admin.Models.ViewModels.Breaking
         public string Description { get; set; }
         
         public string RepairMethod { get; set; }
-        
-        public IFormFile File { get; set; }
+
+        public string[] ImageUrls { get; set; }
     }
 }

@@ -7,7 +7,6 @@ using WST.Admin.Infrastructure;
 using WST.Admin.Models;
 using WST.Admin.Models.Repositories;
 using WST.Admin.Models.ViewModels;
-using WST.Admin.Services;
 
 namespace WST.Admin.Controllers
 {
@@ -68,16 +67,16 @@ namespace WST.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repository.Save(electricLocomotive);
-                
                 if (electricLocomotive.Id == default)
                 {
-                    TempData["message"] = $"{electricLocomotive.SerialNumber} был добавлен";    
+                    TempData["message"] = "Запись была добавлена";    
                 }
                 else
                 {
-                    TempData["message"] = $"{electricLocomotive.SerialNumber} был обновлен";
+                    TempData["message"] = "Запись была обновлена";
                 }
+                
+                _repository.Save(electricLocomotive);
 
                 return RedirectToAction("Index");
             }

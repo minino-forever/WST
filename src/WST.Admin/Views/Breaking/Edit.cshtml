@@ -1,4 +1,4 @@
-@model Breaking
+@model BreakingFormDto
 
 @{
     ViewBag.Title = "Неисправности";
@@ -29,10 +29,25 @@
 
 <div>
     <h3>Галерея</h3>
+    
+    @if (Model.ImageUrls.Any())
+    {
+        @foreach (var url in Model.ImageUrls)
+        {
+            <span style="margin: 5px">
+                <img src=@url alt=@url width="350" height="350"/>
+            </span>
+        }
+    }
+    else
+    {
+        <p class="text-secondary">Изображений нет</p>
+    }
+    
     <form method="post" enctype="multipart/form-data" asp-action="Upload" multiple="multiple">
         <input asp-for="Id" type="hidden" class="form-control"/>
         <label class="btn btn-primary" for="files">
-            <input id="files" type="file" name="files" style="display:none"
+            <input id="files" type="file" name="files" multiple style="display:none"
                    onchange="
                         var submitWrapper = document.getElementById('submitWrapper');
                         submitWrapper.hidden = false;

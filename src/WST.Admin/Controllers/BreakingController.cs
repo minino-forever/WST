@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +17,18 @@ namespace WST.Admin.Controllers
 {
     public class BreakingController : Controller
     {
+        private readonly IMapper _mapper;
+        
         private readonly IBreakingRepository _repository;
         
         private readonly IBreakingImageRepository _breakingImageRepository;
 
-        public BreakingController(IBreakingRepository repository, IBreakingImageRepository breakingImageRepository)
+        public BreakingController(
+            IMapper mapper,
+            IBreakingRepository repository, 
+            IBreakingImageRepository breakingImageRepository)
         {
+            _mapper = mapper;
             _repository = repository;
             _breakingImageRepository = breakingImageRepository;
         }
@@ -62,21 +69,35 @@ namespace WST.Admin.Controllers
             return RedirectToAction("Index");
         }      
         
-        public IActionResult Edit(Guid breakingId)
+        public async Task<IActionResult> Edit(Guid breakingId)
         {
             var breaking = _repository.Breakings.Single(p => p.Id == breakingId);
 
-            return View(breaking);
+
+            var imageIds = await _breakingImageRepository.BreakingImages
+                .Where(bi => bi.BreakingId == breakingId)
+                .Select(bi => bi.Id)
+                .ToArrayAsync();
+
+            var imageUrls = imageIds.Select(id => $"get?breakingImageId={id}").ToArray();
+
+            var formDto = _mapper.Map<BreakingFormDto>(breaking);
+            
+            formDto.ImageUrls = imageUrls;
+            
+            return View(formDto);
         }
         
         [HttpPost]
-        public IActionResult Edit(Breaking breaking)
+        public IActionResult Edit(BreakingFormDto breakingFormDto)
         {
             if (ModelState.IsValid)
             {
+                var breaking = _mapper.Map<Breaking>(breakingFormDto);
+                
                 _repository.Save(breaking);
                 
-                if (breaking.Id == default)
+                if (breakingFormDto.Id == default)
                 {
                     TempData["message"] = $"Запись была добавлена";    
                 }
@@ -88,12 +109,12 @@ namespace WST.Admin.Controllers
                 return RedirectToAction("Index");
             }
             
-            return View(breaking);
+            return View(breakingFormDto);
         }
 
         public IActionResult Create()
         {
-            return View("Edit", new Breaking());
+            return View("Edit", new BreakingFormDto { ImageUrls = new string[0]});
         }
 
         [HttpPost]
@@ -123,6 +144,21 @@ namespace WST.Admin.Controllers
             _breakingImageRepository.Save(breakingImages);
 
             return RedirectToAction("Edit", "Breaking", new { breakingId = id });
+        }
+        
+        [HttpGet]
+        [ResponseCache(Duration = 10 * 60 * 60)]
+        public async Task<IActionResult> Get(Guid breakingImageId)
+        {
+            var imageBytes = await _breakingImageRepository
+                .BreakingImages.Where(bi => bi.Id == breakingImageId)
+                .Select(x => x.Image)
+                .SingleAsync();
+
+            using (var ms = new MemoryStream(imageBytes))
+            {
+                return File(imageBytes, "image/*");
+            }
         }
     }
 }

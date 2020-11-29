@@ -48,7 +48,7 @@ namespace WST.Admin.Infrastructure
             {
                 TagBuilder tag = new TagBuilder("a");
 
-                PageUrlValues["productPage"] = i;
+                PageUrlValues["page"] = i;
 
                 tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
 
