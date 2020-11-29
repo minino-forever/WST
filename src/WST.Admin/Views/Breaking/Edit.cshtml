@@ -6,6 +6,10 @@
 }
 
 <form asp-action="Edit" method="post">
+    <div class="text-left" style="margin-bottom: 15px;margin-top: 15px;">
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отменить</a>
+    </div>
     <input asp-for="Id" type="hidden" class="form-control"/>
     <div class="form-group">
         <label asp-for="Description">Описание</label>
@@ -21,15 +25,11 @@
         </div>
         <input asp-for="RepairMethod" class="form-control"/>
     </div>
-    <div class="text-center">
-        <button class="btn btn-primary" type="submit">Сохранить</button>
-        <a asp-action="Index" class="btn btn-secondary">Отменить</a>
-    </div>
 </form>
 
 <div>
     <h3>Галерея</h3>
-    
+
     @if (Model.ImageUrls.Any())
     {
         @foreach (var url in Model.ImageUrls)
@@ -43,7 +43,7 @@
     {
         <p class="text-secondary">Изображений нет</p>
     }
-    
+
     <form method="post" enctype="multipart/form-data" asp-action="Upload" multiple="multiple">
         <input asp-for="Id" type="hidden" class="form-control"/>
         <label class="btn btn-primary" for="files">
@@ -62,4 +62,3 @@
         </div>
     </form>
 </div>
-

@@ -6,6 +6,10 @@
 }
 
 <form asp-action="Edit" method="post">
+    <div class="text-left" style="margin-bottom: 15px;margin-top: 15px;">
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отменить</a>
+    </div>
     <input asp-for="Id" type="hidden" class="form-control"/>
     <div class="form-group">
         <label asp-for="SerialNumber">Серийный номер</label>
@@ -49,9 +53,6 @@
         </div>
         <input asp-for="UniqueNumber" class="form-control"/>
     </div>
-    <div class="text-center">
-        <button class="btn btn-primary" type="submit">Сохранить</button>
-        <a asp-action="Index" class="btn btn-secondary">Отменить</a>
-    </div>
+
 
 </form>
