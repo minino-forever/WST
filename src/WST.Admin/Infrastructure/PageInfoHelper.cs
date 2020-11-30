@@ -2,6 +2,6 @@ namespace WST.Admin.Infrastructure
 {
     public static class PageInfoHelper
     {
-        public static int PageSize = 15;
+        public static int PageSize = 5;
     }
 }

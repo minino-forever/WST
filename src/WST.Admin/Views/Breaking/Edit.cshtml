@@ -44,7 +44,7 @@
         <p class="text-secondary">Изображений нет</p>
     }
 
-    <form method="post" enctype="multipart/form-data" asp-action="Upload" multiple="multiple">
+    <form method="post" enctype="multipart/form-data" asp-action="Upload" multiple="multiple" style="margin-top: 15px;">
         <input asp-for="Id" type="hidden" class="form-control"/>
         <label class="btn btn-primary" for="files">
             <input id="files" type="file" name="files" multiple style="display:none"
